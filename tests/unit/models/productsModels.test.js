@@ -71,7 +71,6 @@ describe('Get All Products (models/productsModels/getAll)', () => {
 });
 
 // getById
-
 describe('Get By ID (models/productsModels/getById)', () => {
   describe('No to product with given ID', () => {
     before(() => {
