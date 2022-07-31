@@ -68,3 +68,45 @@ describe('Get All Products (services/productsServices/getAll)', () => {
     });
   });
 });
+
+// getById
+
+describe('Get by ID (services/productsServices/getById)', () => {
+  describe('No to product with given ID', () => {
+    before(() => {
+      sinon.stub(productsModels, 'getById').resolves([]);
+    });
+
+    after(() => {
+      productsModels.getById.restore();
+    });
+
+    it('Returns undefined serviceResponse', async () => {
+      const { serviceResponse } = await productsServices.getById(1);
+
+      expect(serviceResponse).to.be.undefined;
+    });
+  });
+
+  describe('Yes to product with given ID', () => {
+    before(async () => {
+      sinon.stub(productsModels, 'getById').resolves(mockedProduct);
+    });
+
+    after(async () => {
+      productsModels.getById.restore();
+    });
+
+    it('Returns Object', async () => {
+      const result = await productsModels.getById(1);
+
+      expect(result).to.be.an('object');
+    });
+
+    it('"id" and "name" properties', async () => {
+      const result = await productsModels.getById();
+
+      expect(result).to.include.all.keys('id', 'name');
+    });
+  });
+});
