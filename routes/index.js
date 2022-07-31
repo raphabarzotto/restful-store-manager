@@ -1,5 +1,5 @@
-const productsRoutes = require('./productsRoutes');
+// const productsRoutes = require('./productsRoutes');
 
-module.exports = {
-  productsRoutes,
-};
+// module.exports = {
+//   productsRoutes,
+// };

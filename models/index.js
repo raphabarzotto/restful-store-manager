@@ -1,7 +1,7 @@
-const connection = require('./connection');
-const productsModels = require('./productsModels');
+// const connection = require('./connection');
+// const productsModels = require('./productsModels');
 
-module.exports = {
-  connection,
-  productsModels,
-}; 
+// module.exports = {
+//   connection,
+//   productsModels,
+// }; 
