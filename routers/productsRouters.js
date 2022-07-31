@@ -8,4 +8,7 @@ const productsRoutes = express.Router();
 productsRoutes.get('/',
   rescue(productsControllers.getAll));
 
+productsRoutes.get('/:id',
+  rescue(productsControllers.getById));
+
 module.exports = productsRoutes;
