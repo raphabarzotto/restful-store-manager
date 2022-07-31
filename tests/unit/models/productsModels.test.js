@@ -69,3 +69,51 @@ describe('Get All Products (models/productsModels/getAll)', () => {
     });
   });
 });
+
+// getById
+
+describe('Get By ID (models/productsModels/getById)', () => {
+  describe('No to product with given ID', () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([[]]);
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
+
+    it('Returs Array', async () => {
+      const result = await productsModels.getById(1);
+
+      expect(result).to.be.an('array');
+    });
+
+    it('Empty Array', async () => {
+      const result = await productsModels.getById(1);
+
+      expect(result).to.be.empty;
+    });
+  });
+
+  describe('Yes to product with given ID', () => {
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([mockedProduct]);
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
+
+    it('Returns Array', async () => {
+      const result = await productsModels.getById(1);
+
+      expect(result).to.be.an('array');
+    });
+
+    it('Not empty array', async () => {
+      const result = await productsModels.getById(1);
+
+      expect(result).to.not.be.empty;
+    });
+  });
+});
