@@ -28,6 +28,14 @@ const create = async (req, res) => {
   return res.status(201).json(sales);
 };
 
+// getAll
+const getAll = async (_req, res) => {
+  const { code, serviceResponse } = await salesServices.getAll();
+
+  return res.status(code).json(serviceResponse);
+};
+
 module.exports = {
   create,
+  getAll,
 };
