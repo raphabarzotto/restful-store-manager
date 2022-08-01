@@ -3,12 +3,12 @@ const connection = require('./connection');
 const create = async (sale) => {
   const { saleId, productId, quantity } = sale;
 
-  const [sale] = await connection.execute(
+  const [result] = await connection.execute(
     'INSERT StoreManager.sales_products sale_id, product_id, quantity VALUES ?, ?, ?',
     [saleId, productId, quantity],
   );
 
-  return sale;
+  return result;
 };
 
 const getAll = async () => {
