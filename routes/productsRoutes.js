@@ -19,4 +19,7 @@ productsRoutes.put('/:id',
 productsRoutes.delete('/:id',
   rescue(productsControllers.deleteById));
 
+productsRoutes.get('/search',
+  rescue(productsControllers.getBySearch));
+
 module.exports = productsRoutes;
