@@ -11,4 +11,7 @@ productsRoutes.get('/products',
 productsRoutes.get('/products/:id',
   rescue(productsControllers.getById));
 
+productsRoutes.post('/products',
+  rescue(productsControllers.create));
+
 module.exports = productsRoutes;
