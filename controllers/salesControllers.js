@@ -35,7 +35,7 @@ const getAll = async (_req, res) => {
   return res.status(code).json(serviceResponse);
 };
 
-//getById
+// getById
 const getById = async (req, res) => {
   const { id } = req.params;
 
@@ -46,8 +46,23 @@ const getById = async (req, res) => {
   return res.status(code).json(serviceResponse);
 };
 
+// deleteById
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const numId = +id;
+
+  const { serviceResponse } = await salesServices.getById(numId);
+
+  if (serviceResponse.length === 0) return res.status(404).json({ message: 'Sale not found' });
+
+  const { code } = await salesServices.deleteById(id);
+
+  return res.status(+code).end();
+};
+
 module.exports = {
   create,
   getAll,
   getById,
+  deleteById,
 };
