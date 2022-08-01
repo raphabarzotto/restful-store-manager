@@ -44,7 +44,7 @@ const update = async (req, res) => {
   const numId = +id;
   const { name } = req.body;
 
-  const { error } = productsCreateSchemas.validate(req.body);
+  const { error } = productsSchema.validate(req.body);
 
   // posso fazer uma middleware pra isso depois
   if (error) {
