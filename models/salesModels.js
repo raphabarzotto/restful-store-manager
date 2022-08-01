@@ -13,7 +13,7 @@ const create = async (sale) => {
 
 const getAll = async () => {
   const [sales] = await connection.execute(
-    'SELECT * FROM StoreManager.sales_products ORDER BY id;',
+    'SELECT * FROM StoreManager.sales_products ORDER BY sale_id;',
   );
 
   return sales;
