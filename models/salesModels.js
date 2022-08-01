@@ -35,7 +35,8 @@ const deleteById = async (id) => {
 
 const update = async ({ id, name }) => {
   await connection.execute(
-    'UPDATE StoreManager.sales_products ' + 'SET quantity = ? WHERE product_id = ?;', [name, id],
+    `UPDATE StoreManager.sales_products
+    SET quantity = ? WHERE product_id = ?;`, [name, id],
   );
 
   return { id, name };
@@ -47,4 +48,4 @@ module.exports = {
   getById,
   deleteById,
   update,
-}
+};

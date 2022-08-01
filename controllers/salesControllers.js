@@ -68,7 +68,7 @@ const update = async (req, res) => {
 
   // posso fazer uma middleware pra isso depois
   for (let index = 0; index < request.length; index += 1) {
-    const { error } = salesCreateSchema.validate(request[index]);
+    const { error } = salesSchema.validate(request[index]);
 
     if (error) {
       const [code, message] = error.message.split('|');
