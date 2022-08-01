@@ -5,13 +5,13 @@ const { productsControllers } = require('../controllers');
 
 const productsRoutes = express.Router();
 
-productsRoutes.get('/products',
+productsRoutes.get('/',
   rescue(productsControllers.getAll));
 
-productsRoutes.get('/products/:id',
+productsRoutes.get('/:id',
   rescue(productsControllers.getById));
 
-productsRoutes.post('/products',
+productsRoutes.post('/',
   rescue(productsControllers.create));
 
 module.exports = productsRoutes;

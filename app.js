@@ -12,7 +12,7 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.use('/', productsRoutes);
+app.use('/products', productsRoutes);
 
 app.all('*', middlewares.handleRouteNotFound);
 app.use(middlewares.handleError);
