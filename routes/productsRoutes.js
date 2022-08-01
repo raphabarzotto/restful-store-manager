@@ -1,5 +1,4 @@
 const express = require('express');
-// precisa pra async?
 const rescue = require('express-rescue');
 const { productsControllers } = require('../controllers');
 
@@ -16,5 +15,8 @@ productsRoutes.post('/',
 
 productsRoutes.put('/:id',
   rescue(productsControllers.update));
+
+productsRoutes.delete('/:id',
+  rescue(productsControllers.deleteById));
 
 module.exports = productsRoutes;
