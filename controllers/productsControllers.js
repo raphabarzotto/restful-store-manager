@@ -1,6 +1,6 @@
 const productsServices = require('../services/productsServices');
 
-const productsSquema = require('../joiSchemas/productsSquema');
+const productsSquema = require('../joiSchemas/productsSchema');
 
 const getAll = async (_req, res) => {
   const { code, serviceResponse } = await productsServices.getAll();
