@@ -83,10 +83,20 @@ const deleteById = async (req, res) => {
   return res.status(+code).end();
 };
 
+// getBySearch
+const getBySearch = async (req, res) => {
+  const { q } = req.query;
+
+  const products = await productsServices.getBySearch(q);
+
+  return res.status(200).json(products.serviceResponse);
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
   deleteById,
+  getBySearch,
 };
