@@ -150,3 +150,43 @@ describe('Create a new product - /productsServices/create', () => {
     });
   });
 });
+
+// update
+describe('Update a product - productsService/update', () => {
+  describe('Update Sucessfully', () => {
+    const request = { id: 1, name: "Martelo do Batman" };
+
+    const response = { id: 1, name: 'Martelo do Batman' };
+
+    before(() => {
+      sinon.stub(productsModels, 'update').resolves(response);
+    });
+
+    after(() => {
+      productsModels.update.restore();
+    });
+
+    it('Returns Object', async () => {
+      const result = await productsServices.update(request);
+
+      expect(result).to.be.an('object');
+    });
+    it('Not Empty Object', async () => {
+      const result = await productsServices.update(request);
+
+      expect(result).to.not.be.empty;
+    });
+
+    it('"code" and "serviceResponse" properties', async () => {
+      const result = await productsServices.update(request);
+
+      expect(result).to.include.all.keys('code', 'serviceResponse');
+    });
+
+    it('"id" and "name" properties', async () => {
+      const result = await productsServices.update(request);
+
+      expect(result.serviceResponse).to.include.all.keys('id', 'name');
+    });
+  });
+});
