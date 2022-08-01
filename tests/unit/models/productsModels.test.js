@@ -103,10 +103,10 @@ describe('Get By ID (models/productsModels/getById)', () => {
       connection.execute.restore();
     });
 
-    it('Returns Array', async () => {
+    it('Returns Object', async () => {
       const result = await productsModels.getById(1);
 
-      expect(result).to.be.an('array');
+      expect(result).to.be.an('object');
     });
 
     it('Not empty array', async () => {
