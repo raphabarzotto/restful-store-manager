@@ -70,7 +70,6 @@ describe('Get All Products (services/productsServices/getAll)', () => {
 });
 
 // getById
-
 describe('Get by ID (services/productsServices/getById)', () => {
   describe('No to product with given ID', () => {
     before(() => {
@@ -107,6 +106,47 @@ describe('Get by ID (services/productsServices/getById)', () => {
       const result = await productsModels.getById();
 
       expect(result).to.include.all.keys('id', 'name');
+    });
+  });
+});
+
+// create
+describe('Create a new product - /productsServices/create', () => {
+
+  describe('Create new product sucessfully', () => {
+    const request = { name: "ProdutoX" };
+    const response = { id: 4, name: 'ProdutoX' };
+
+    before(() => {
+      sinon.stub(productsModels, 'create').resolves(response);
+    });
+
+    after(() => {
+      productsModels.create.restore();
+    });
+
+    it('Returns Object', async () => {
+      const result = await productsServices.create(request);
+
+      expect(result).to.be.an('object');
+    });
+
+    it('Not Empty Object', async () => {
+      const result = await productsServices.create(request);
+
+      expect(result).to.not.be.empty;
+    });
+
+    it('"code" and "serviceResponse" properties', async () => {
+      const result = await productsServices.create(request);
+
+      expect(result).to.include.all.keys('code', 'serviceResponse');
+    });
+
+    it('"id" and "name" properties', async () => {
+      const result = await productsServices.create(request);
+
+      expect(result.serviceResponse).to.include.all.keys('id', 'name');
     });
   });
 });
