@@ -18,8 +18,15 @@ const create = async ({ name }) => {
   return { code: 200, serviceResponse: modelResponse };
 };
 
+const update = async ({ id, name }) => {
+  const modelResponse = await productsModels.update({ id, name });
+
+  return { code: 200, serviceResponse: modelResponse };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
+  update,
 }; 
