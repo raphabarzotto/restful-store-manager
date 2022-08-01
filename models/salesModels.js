@@ -19,7 +19,16 @@ const getAll = async () => {
   return sales;
 };
 
+const getById = async (id) => {
+  const [sale] = await connection.execute(
+    'SELECT * FROM StoreManager.sales_products WHERE sale_id = ?;', [id],
+  );
+
+  return sale;
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 }
