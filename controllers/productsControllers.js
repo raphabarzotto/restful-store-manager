@@ -2,12 +2,14 @@ const productsServices = require('../services/productsServices');
 
 const productsSchema = require('../joiSchemas/productsSchema');
 
+// getAll
 const getAll = async (_req, res) => {
   const { code, serviceResponse } = await productsServices.getAll();
 
   return res.status(code).json(serviceResponse);
 };
 
+// getById
 const getById = async (req, res) => {
   const { id } = req.params;
 
@@ -18,6 +20,7 @@ const getById = async (req, res) => {
   return res.status(code).json(serviceResponse);
 };
 
+// create
 const create = async (req, res) => {
   const { name } = req.body;
 
@@ -39,6 +42,7 @@ const create = async (req, res) => {
   res.status(201).json(serviceResponse);
 };
 
+// update
 const update = async (req, res) => {
   const { id } = req.params;
   const numId = +id;
@@ -63,9 +67,26 @@ const update = async (req, res) => {
   res.status(code).json(serviceResponse);
 };
 
+// deleteById
+const deleteById = async (req, res) => {
+  const { id } = req.params;
+  const numId = +id;
+
+  const products = await productsServices.getAll();
+
+  const validate = products.serviceResponse.filter((p) => p.id === numId);
+
+  if (validate.length === 0) return res.status(404).json({ message: 'Product not found' });
+
+  const { code } = await productsServices.deleteById(id);
+
+  return res.status(+code).end();
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  deleteById,
 };
