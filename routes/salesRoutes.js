@@ -4,19 +4,19 @@ const { salesControllers } = require('../controllers');
 
 const salesRoutes = express.Router();
 
-salesRoutes.post('/sales',
+salesRoutes.post('/',
   rescue(salesControllers.create));
 
-salesRoutes.get('/sales/',
+salesRoutes.get('/',
   rescue(salesControllers.getAll));
 
-salesRoutes.get('/sales/:id',
+salesRoutes.get('/:id',
   rescue(salesControllers.getById));
 
-salesRoutes.put('/sales/:id',
+salesRoutes.put('/:id',
   rescue(salesControllers.update));
 
-salesRoutes.delete('/sales/:id',
+salesRoutes.delete('/:id',
   rescue(salesControllers.deleteById));
 
 module.exports = salesRoutes;
