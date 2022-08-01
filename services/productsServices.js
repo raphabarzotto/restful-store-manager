@@ -12,7 +12,14 @@ const getById = async (id) => {
   return { code: 200, serviceResponse: modelResponse };
 };
 
+const create = async ({ name }) => {
+  const modelResponse = await productsModels.create({ name });
+
+  return { code: 200, serviceResponse: modelResponse };
+};
+
 module.exports = {
   getAll,
   getById,
+  create,
 }; 
