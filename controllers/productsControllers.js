@@ -1,6 +1,6 @@
 const productsServices = require('../services/productsServices');
 
-const productsSquema = require('../joiSchemas/productsSchema');
+const productsSchema = require('../joiSchemas/productsSchema');
 
 const getAll = async (_req, res) => {
   const { code, serviceResponse } = await productsServices.getAll();
@@ -21,7 +21,7 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   const { name } = req.body;
 
-  const { error } = productsSquema.validate(req.body);
+  const { error } = productsSchema.validate(req.body);
 
   if (error) {
     const [code, message] = error.message.split('|');
