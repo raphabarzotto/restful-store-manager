@@ -7,6 +7,9 @@ const productsRoutes = express.Router();
 productsRoutes.get('/',
   rescue(productsControllers.getAll));
 
+productsRoutes.get('/search',
+  rescue(productsControllers.getBySearch));
+
 productsRoutes.get('/:id',
   rescue(productsControllers.getById));
 
@@ -18,8 +21,5 @@ productsRoutes.put('/:id',
 
 productsRoutes.delete('/:id',
   rescue(productsControllers.deleteById));
-
-productsRoutes.get('/search',
-  rescue(productsControllers.getBySearch));
 
 module.exports = productsRoutes;
