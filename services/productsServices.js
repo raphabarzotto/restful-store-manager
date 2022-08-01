@@ -30,10 +30,17 @@ const deleteById = async (id) => {
   return { code: 204 };
 };
 
+const getBySearch = async (name) => {
+  const modelResponse = await productsModels.getBySearch(name);
+
+  return { code: 200, serviceResponse: modelResponse };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
   deleteById,
+  getBySearch,
 }; 
