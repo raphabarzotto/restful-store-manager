@@ -1,5 +1,7 @@
 const productsServices = require('../services/productsServices');
 
+const productsSquema = require('../joiSchemas/productsSquema');
+
 const getAll = async (_req, res) => {
   const { code, serviceResponse } = await productsServices.getAll();
 
@@ -16,7 +18,29 @@ const getById = async (req, res) => {
   return res.status(code).json(serviceResponse);
 };
 
+const create = async (req, res) => {
+  const { name } = req.body;
+
+  const { error } = productsSquema.validate(req.body);
+
+  if (error) {
+    const [code, message] = error.message.split('|');
+    return res.status(+code).json({ message });
+  }
+
+  const products = await productsServices.getAll();
+
+  const validate = products.serviceResponse.some((p) => p.name === name);
+
+  if (validate) return res.status(409).json({ message: 'Product already exists' });
+
+  const { serviceResponse } = await productsServices.create(req.body);
+
+  res.status(201).json(serviceResponse);
+};
+
 module.exports = {
   getAll,
   getById,
+  create,
 };
