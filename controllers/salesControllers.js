@@ -60,9 +60,43 @@ const deleteById = async (req, res) => {
   return res.status(+code).end();
 };
 
+// update
+const update = async (req, res) => {
+  const { id } = req.params;
+
+  const request = req.body;
+
+  // posso fazer uma middleware pra isso depois
+  for (let index = 0; index < request.length; index += 1) {
+    const { error } = salesCreateSchema.validate(request[index]);
+
+    if (error) {
+      const [code, message] = error.message.split('|');
+      return res.status(+code).json({ message });
+    }
+  }
+
+  const { serviceResponse } = await salesServices.getById(id);
+
+  if (serviceResponse.length === 0) return res.status(404).json({ message: 'Sale not found' });
+
+  // maybe middlewares tb
+  const verifyProductId = await Promise.all(request
+    .map(async ({ productId }) => productsServices.getById(productId)));
+
+  const idCheck = verifyProductId.some((product) => product.serviceResponse);
+
+  if (!idCheck) return res.status(404).json({ message: 'Product not found' });
+
+  const updatedSale = await salesServices.update({ request, id });
+
+  return res.status(200).json(updatedSale);
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   deleteById,
+  update,
 };
