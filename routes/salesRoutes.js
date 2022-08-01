@@ -13,4 +13,7 @@ salesRoutes.get('/sales/',
 salesRoutes.get('/sales/:id',
   rescue(salesControllers.getById));
 
+salesRoutes.put('/sales/:id',
+  rescue(salesControllers.update));
+
 module.exports = salesRoutes;
