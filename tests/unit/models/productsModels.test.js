@@ -5,7 +5,7 @@ const { expect } = require('chai');
 const { connection, productsModels } = require('../../../models');
 
 const mockedProduct = { id: 1, name: 'Martelo de Thor' };
-// Will need getAll, getById, create and update
+// Will need getAll, getById, create, update, exclude and getByName
 
 // getAll
 describe('Get All Products - productsModels/getAll', () => {
@@ -148,6 +148,43 @@ describe('Create a new product - productsModels/create', () => {
 
     it('"id" and "name" properties', async () => {
       const result = await productsModels.create(request);
+
+      expect(result).to.include.all.keys('id', 'name');
+    });
+  });
+});
+
+// update
+describe('Update a product - productsModels/update', () => {
+  describe('Update Sucessfully', () => {
+    const request = { id: 1, name: "Martelo do Batman" };
+
+    const ResultSetHeader = {
+      insertId: 0,
+    };
+
+    before(() => {
+      sinon.stub(connection, 'execute').resolves([ResultSetHeader]);
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
+
+    it('Returns Object', async () => {
+      const result = await productsModels.update(request);
+
+      expect(result).to.be.an('object');
+    });
+
+    it('Not Empty Object', async () => {
+      const result = await productsModels.update(request);
+
+      expect(result).to.not.be.empty;
+    });
+
+    it('"id" and "name" properties', async () => {
+      const result = await productsModels.update(request);
 
       expect(result).to.include.all.keys('id', 'name');
     });
