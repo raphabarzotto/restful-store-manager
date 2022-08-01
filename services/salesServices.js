@@ -8,6 +8,13 @@ const create = async (saleId, sale) => {
   return true;
 };
 
+const getAll = async () => {
+  const modelResponse = await salesModels.getAll();
+
+  return modelResponse;
+};
+
 module.exports = {
   create,
+  getAll,
 }; 
