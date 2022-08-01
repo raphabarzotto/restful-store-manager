@@ -8,7 +8,7 @@ const mockedProduct = { id: 1, name: 'Martelo de Thor' };
 // Will need getAll, getById, create and update
 
 // getAll
-describe('Get All Products (models/productsModels/getAll)', () => {
+describe('Get All Products - productsModels/getAll', () => {
   describe('When there are no registered products', () => {
     before(() => {
       sinon.stub(connection, 'execute').resolves([[]]);
@@ -71,7 +71,7 @@ describe('Get All Products (models/productsModels/getAll)', () => {
 });
 
 // getById
-describe('Get By ID (models/productsModels/getById)', () => {
+describe('Get By ID - productsModels/getById', () => {
   describe('No to product with given ID', () => {
     before(() => {
       sinon.stub(connection, 'execute').resolves([[]]);
@@ -113,6 +113,43 @@ describe('Get By ID (models/productsModels/getById)', () => {
       const result = await productsModels.getById(1);
 
       expect(result).to.not.be.empty;
+    });
+  });
+});
+
+// create
+describe('Create a new product - productsModels/create', () => {
+  describe('Create new product sucessfully', () => {
+    const result = [{
+      insertId: 4,
+    }];
+
+    const request = { name: "ProdutoX" };
+
+    before(() => {
+      sinon.stub(connection, 'execute').resolves(result);
+    });
+
+    after(() => {
+      connection.execute.restore();
+    });
+
+    it('Returns Object', async () => {
+      const result = await productsModels.create(request);
+
+      expect(result).to.be.an('object');
+    });
+
+    it('Not Empty Object', async () => {
+      const result = await productsModels.create(request);
+
+      expect(result).to.not.be.empty;
+    });
+
+    it('"id" and "name" properties', async () => {
+      const result = await productsModels.create(request);
+
+      expect(result).to.include.all.keys('id', 'name');
     });
   });
 });
