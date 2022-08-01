@@ -11,17 +11,24 @@ const create = async (saleId, sale) => {
 const getAll = async () => {
   const modelResponse = await salesModels.getAll();
 
-  return modelResponse;
+  return { code: 200, serviceResponse: modelResponse };
 };
 
 const getById = async (id) => {
   const modelResponse = await salesModels.getById(id);
 
-  return modelResponse;
+  return { code: 200, serviceResponse: modelResponse };
+};
+
+const deleteById = async (id) => {
+  await salesModels.deleteById(id);
+
+  return { code: 204 };
 };
 
 module.exports = {
   create,
   getAll,
   getById,
+  deleteById,
 }; 
