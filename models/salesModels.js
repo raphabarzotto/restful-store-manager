@@ -11,6 +11,15 @@ const create = async (sale) => {
   return sale;
 };
 
+const getAll = async () => {
+  const [sales] = await connection.execute(
+    'SELECT * FROM StoreManager.sales_products ORDER BY id;',
+  );
+
+  return sales;
+};
+
 module.exports = {
   create,
+  getAll,
 }
