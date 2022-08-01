@@ -16,4 +16,7 @@ salesRoutes.get('/sales/:id',
 salesRoutes.put('/sales/:id',
   rescue(salesControllers.update));
 
+salesRoutes.delete('/sales/:id',
+  rescue(salesControllers.deleteById));
+
 module.exports = salesRoutes;
