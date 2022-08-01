@@ -35,7 +35,19 @@ const getAll = async (_req, res) => {
   return res.status(code).json(serviceResponse);
 };
 
+//getById
+const getById = async (req, res) => {
+  const { id } = req.params;
+
+  const { code, serviceResponse } = await salesServices.getById(+id);
+
+  if (serviceResponse.length === 0) return res.status(404).json({ message: 'Sale not found' });
+
+  return res.status(code).json(serviceResponse);
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
