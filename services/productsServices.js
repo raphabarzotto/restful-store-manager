@@ -24,9 +24,16 @@ const update = async ({ id, name }) => {
   return { code: 200, serviceResponse: modelResponse };
 };
 
+const deleteById = async (id) => {
+  await productsModels.deleteById(id);
+
+  return { code: 204 };
+};
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  deleteById,
 }; 
