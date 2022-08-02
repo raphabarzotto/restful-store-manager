@@ -1,15 +1,16 @@
-const { response } = require('express');
 const { salesModels } = require('../models');
 
 const create = async (request) => {
   const allSales = await salesModels.getAll();
   const saleId = allSales[allSales.length - 1].sale_id + 1;
 
-  for (let index = 0; index < request.length; index += 1) { 
-    await salesModels.create(saleId, request[index])
-  }
+  // mentoria
+  await Promise.all(request.map(async (element) => {
+    await salesModels.create(saleId, element);
+    return element;
+  }));
 
-  return ({id: saleId, itemsSold: request})
+  return ({ id: saleId, itemsSold: request });
 };
 
 const getAll = async () => {

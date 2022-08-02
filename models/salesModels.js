@@ -3,7 +3,7 @@ const connection = require('./connection');
 const create = async (saleId, request) => {
   const { productId, quantity } = request;
   await connection.execute(
-    'INSERT StoreManager.sales (date) VALUES (NOW());'
+    'INSERT StoreManager.sales (date) VALUES (NOW());',
   );
   await connection.execute(
     'INSERT StoreManager.sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
