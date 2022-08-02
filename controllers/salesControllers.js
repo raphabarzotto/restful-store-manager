@@ -5,6 +5,8 @@ const salesSchema = require('../joiSchemas/salesSchema');
 // create
 const create = async (req, res) => {
   const request = req.body;
+  const products = await (await productsServices.getAll()).serviceResponse;
+  const idsDB = products.map((prod) => prod.id);
 
   // posso fazer uma middleware pra isso depois
   for (let index = 0; index < request.length; index += 1) {
@@ -14,14 +16,11 @@ const create = async (req, res) => {
       const [code, message] = error.message.split('|');
       return res.status(+code).json({ message });
     }
+
+    if (!idsDB.includes(request[index].productId)) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
   }
-
-  const verifyProductId = await Promise.all(request
-    .map(async ({ productId }) => productsServices.getById(productId)));
-
-  const idCheck = verifyProductId.find(({ serviceResponse }) => serviceResponse);
-
-  if (!idCheck) return res.status(404).json({ message: 'Product not found' });
 
   const sales = await salesServices.create(request);
 

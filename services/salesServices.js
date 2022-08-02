@@ -1,11 +1,15 @@
+const { response } = require('express');
 const { salesModels } = require('../models');
 
-const create = async (saleId, sale) => {
-  const modelResponse = await sale.map(async ({ productId, quantity }) => {
-    salesModels.create(saleId, productId, quantity);
-  });
+const create = async (request) => {
+  const allSales = await salesModels.getAll();
+  const saleId = allSales[allSales.length - 1].sale_id + 1;
 
-  return modelResponse;
+  for (let index = 0; index < request.length; index += 1) { 
+    await salesModels.create(saleId, request[index])
+  }
+
+  return ({id: saleId, itemsSold: request})
 };
 
 const getAll = async () => {
