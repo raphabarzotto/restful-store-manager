@@ -13,8 +13,8 @@ salesRoutes.get('/',
 salesRoutes.get('/:id',
   rescue(salesControllers.getById));
 
-salesRoutes.put('/:id',
-  rescue(salesControllers.update));
+// salesRoutes.put('/:id',
+//   rescue(salesControllers.update));
 
 salesRoutes.delete('/:id',
   rescue(salesControllers.deleteById));
