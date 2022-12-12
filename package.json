@@ -13,8 +13,8 @@
     "start": "node index.js",
     "debug": "nodemon --ignore coverage index.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx",
-    "migration": "node -e \"require('./__tests__/_utils').runMigration()\"",
-    "seed": "node -e \"require('./__tests__/_utils').runSeed()\"",
+    "migration": "node -e \"require('./database_utils/runners').runMigration()\"",
+    "seed": "node -e \"require('./database_utils/runners').runSeed()\"",
     "mytest": "mocha tests/unit/**/*.js --exit"
   },
   "repository": {
