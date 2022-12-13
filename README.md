@@ -11,9 +11,9 @@ To test it, you can use any API client like [Insomnia](https://insomnia.rest/) o
   <summary><strong>Locally</strong></summary>
 
   1. `npm install`
-  2. `npm run migration` &rarr; to create database
-  3. `npm run seed` &rarr; to seed database
-  4. create a `.env` file based on `.env.example`
+  2. create a `.env` file based on `.env.example`
+  3. `npm run migration` &rarr; to create database
+  4. `npm run seed` &rarr; to seed database
   5. `npm start`
 </details>
 <details>
@@ -35,13 +35,13 @@ To test it, you can use any API client like [Insomnia](https://insomnia.rest/) o
 3. `GET /products/search?q=SearchTerm`
   - will make a query with the search term given and return an array with results
 4. `POST /products`
-  - body shoul be like this:
+  - body should be like this:
   ```json
   {
     "name": "Product Name Here"
   }
   ```
-  - if right, shoul return `id` and `name`:
+  - if right, should return `id` and `name`:
   ```json
   {
     "id": 4,
@@ -49,13 +49,13 @@ To test it, you can use any API client like [Insomnia](https://insomnia.rest/) o
   }
   ```
 5. `PUT /products/:id`
-  - body shoul be like this:
+  - body should be like this:
   ```json
   {
     "name": "Product New Name Here"
   }
   ```
-  - if right, shoul return `id` and new `name`:
+  - if right, should return `id` and new `name`:
   ```json
   {
     "id": 1,
