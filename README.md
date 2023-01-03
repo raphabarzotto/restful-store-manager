@@ -20,7 +20,7 @@ To test it, you can use any API client like [Insomnia](https://insomnia.rest/) o
   <summary><strong>Docker</strong></summary>
 
   1. `docker-compose up -d` &rarr; to install container
-  2. `docker exec -it talker_manager bash` &rarr; to enter container
+  2. `docker exec -it store_manager bash` &rarr; to enter container
   3. `npm install`
   4. `npm run migration` &rarr; to create database
   5. `npm run seed` &rarr; to seed database
